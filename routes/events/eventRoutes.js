@@ -1,11 +1,12 @@
 const express = require("express")
 const router = express.Router();
-const { createEvent, getEvents, getEventById } = require("./eventController")
+const { createEvent, getEvents, getEventById, updateEventById } = require("./eventController")
 
 router.get("/", async (req, res) => {
     try {
-        // no parameters cause we want all
-        const events = await getEvents();
+        // no parameters cause we want all params are for specific items like names/id's
+        //localhost:3000/api/events?category=fun is all in getEvents(req.query);
+        const events = await getEvents(req.query);
             res.json({message: "success", payload: events
         })
     } catch (error) {
@@ -40,4 +41,14 @@ router.post("/", async (req, res) => {
         
     }
     })
+router.put("/:eventId", async (req, res) => {
+    try {
+        const updatedEvent = await updateEventById(req.params.eventId, req.body)
+        res.json({message: "success", payload: updatedEvent})
+    } catch (error) {
+        res.json({
+            message: "failure" , payload: error.message
+        })
+    }
+})
 module.exports = router

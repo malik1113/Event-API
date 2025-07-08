@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router();
-const { createBooking } = require("./bookingController")
+const { createBooking, getAllBooking } = require("./bookingController")
 router.post("/", async (req,res) => {
     try {
         const booking = await createBooking(req.body)
@@ -14,5 +14,14 @@ router.post("/", async (req,res) => {
         })
     }
 })
-
+router.get("/", async (req,res) => {
+    const bookings = await getAllBooking()
+    try {
+        res.json({
+            message: "success", payload: bookings
+        })
+    } catch (error) {
+        throw error.message
+    }
+})
 module.exports = router;

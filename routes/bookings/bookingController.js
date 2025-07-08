@@ -2,7 +2,17 @@ const Booking = require("./bookingsModel")
 const { getEventById } = require("../events/eventController")
 const Event = require("../events/eventModels")
 // add getEventById function for ticket availability and pricing data
+const getAllBooking = async () => {
+    try {
 
+        // populate allows us when refering to another model instead of there id give us there actual data 
+        const bookings = await Booking.find().populate("user").populate("event")
+        return bookings
+    } catch (error) {
+        throw error
+    }
+
+}
 const createBooking = async (bookingData) => {
     try {
         console.log(bookingData)
@@ -35,5 +45,6 @@ const createBooking = async (bookingData) => {
 }
 
 module.exports = { 
-    createBooking
+    createBooking,
+    getAllBooking
 }
