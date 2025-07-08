@@ -23,7 +23,7 @@ const getUserById = async (id) => {
 // everything yu pass into a function becomes the parameter of that function
 // the parameter takes the place of the arguments you call the function with 
 // ALAWAYS TRU!! FOR ALL FUNCTIONs
-const createUser = async () => {
+const createUser = async (userData) => {
     try {
         // mongooses user.create() adds data to database... creates user and adds to the database
         const newUser = await User.create(userData)

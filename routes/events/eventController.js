@@ -1,7 +1,7 @@
 const Event = require("./eventModels");
 
 // Create events
-const createEvent = async () => {
+const createEvent = async (eventData) => {
     try {
         // mongooses user.create() adds data to database... creates user and adds to the database
         const newEvent = await Event.create(eventData)
